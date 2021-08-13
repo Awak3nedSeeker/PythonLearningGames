@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>125b6e36-1966-4f2d-8944-d1ce42c06cad</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PythonLearning.py</StartupFile>
+    <StartupFile>PythonPong.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,7 +21,19 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="PythonLearning.py" />
+    <Compile Include="PythonOnlineGame.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PythonTetris.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PythonConnect4.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PythonSnake.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PythonPong.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
