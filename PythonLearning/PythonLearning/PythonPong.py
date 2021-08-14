@@ -1,6 +1,8 @@
 # Simple Pong in Python 3 for Beginners
+# Sound should be .wav
 
 import turtle
+import winsound
 
 Win = turtle.Screen();
 Win.title("HI");
@@ -19,6 +21,10 @@ Root.protocol("WM_DELETE_WINDOW", Quit);
 
 
 Running = True;
+
+# Score
+Score_A = 0;
+Score_B = 0;
 
 # Paddle A
 Paddle_A = turtle.Turtle();
@@ -45,8 +51,17 @@ Ball.shape("square");
 Ball.color("white");
 Ball.penup();
 Ball.goto(0, 0);
-Ball.dx = 2;
-Ball.dy = 2;
+Ball.dx = 0.25;
+Ball.dy = 0.25;
+
+# Pen
+Pen = turtle.Turtle();
+Pen.speed(0);
+Pen.color("white");
+Pen.penup();
+Pen.hideturtle();
+Pen.goto(0, 260);
+Pen.write("Player A: 0 | Player B: 0", align="center", font=("Comics Sans", 24, "normal"))
 
 # Function
 def Paddle_A_Up():
@@ -84,5 +99,39 @@ while Running:
     # Move the Ball
     Ball.setx(Ball.xcor() + Ball.dx);
     Ball.sety(Ball.ycor() + Ball.dy);
+
+    # Border Checking
+    if Ball.ycor() > 290:
+        Ball.sety(290);
+        Ball.dy *= -1;
+        # winsound.PlaySound("Bounce.wav", winsound.SND_ASYNCH)
+
+    if Ball.ycor() < -290:
+        Ball.sety(-290);
+        Ball.dy *= -1;
+
+    if Ball.xcor() > 390:
+        Ball.goto(0, 0);
+        Ball.dx *= -1;
+        Score_A += 1;
+        Pen.clear();
+        Pen.write("Player A: {} | Player B: {}".format(Score_A, Score_B), align="center", font=("Comics Sans", 24, "normal"))
+
+
+    if Ball.xcor() < -390:
+        Ball.goto(0, 0);
+        Ball.dx *= -1;
+        Score_B += 1;
+        Pen.clear();
+        Pen.write("Player A: {} | Player B: {}".format(Score_A, Score_B), align="center", font=("Comics Sans", 24, "normal"))
+
+    # Padle and Ball Collisions
+    if (Ball.xcor() > 340 and Ball.xcor() < 350) and (Ball.ycor() < Paddle_B.ycor() +50 and Ball.ycor() > Paddle_B.ycor() - 50):
+        Ball.setx(340);
+        Ball.dx *= -1;
+
+    if (Ball.xcor() < -340 and Ball.xcor() > -350) and (Ball.ycor() < Paddle_A.ycor() +50 and Ball.ycor() > Paddle_A.ycor() - 50):
+        Ball.setx(-340);
+        Ball.dx *= -1;
 
 Win.bye();
